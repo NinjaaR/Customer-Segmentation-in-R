@@ -26,7 +26,7 @@ data$purchase.invoice <- ifelse(data$item.return=="TRUE", 0, 1)
 
 
 #################################
-# Create customer-level dataset #
+
 #################################
 
 customers <- as.data.frame(unique(data$CustomerID))
