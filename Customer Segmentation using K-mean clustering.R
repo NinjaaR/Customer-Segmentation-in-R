@@ -24,18 +24,11 @@ length(unique(data$CustomerID))
 data$item.return <- grepl("C", data$InvoiceNo, fixed=TRUE)
 data$purchase.invoice <- ifelse(data$item.return=="TRUE", 0, 1)
 
-
-#################################
-
-#################################
-
 customers <- as.data.frame(unique(data$CustomerID))
 names(customers) <- "CustomerID"
 
 
-###########
-# Recency #
-###########
+#Recency of the Customer
 
 data$recency <- as.Date("2011-12-10") - as.Date(data$InvoiceDate)
 
@@ -52,10 +45,7 @@ remove(recency)
 
 customers$recency <- as.numeric(customers$recency)
 
-#############
-# Frequency #
-#############
-
+#Frequency of Customer
 customer.invoices <- subset(data, select = c("CustomerID","InvoiceNo", "purchase.invoice"))
 
 customer.invoices <- customer.invoices[!duplicated(customer.invoices), ]
@@ -79,9 +69,7 @@ customers <- subset(customers, frequency > 0)
 
 str(customers$frequency)
 
-###############################
-# Monetary Value of Customers #
-###############################
+# Monetary Value of Customers
 
 # Total spent on each item on an invoice
 data$Amount <- data$Quantity * data$UnitPrice
